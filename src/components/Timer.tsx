@@ -27,7 +27,9 @@ const Timer = () => {
       <button disabled={!timerStarted} onClick={() => stopClick()}>
         Stop
       </button>
-      <button disabled={!timerStarted} onClick={() => resetClick()}>reset</button>
+      <button disabled={!timerStarted} onClick={() => resetClick()}>
+        reset
+      </button>
     </div>
   );
 };
