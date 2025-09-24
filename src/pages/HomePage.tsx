@@ -8,8 +8,8 @@ const HomePage = () => {
         <Timer />
       </div>
       <div>
-        <button>Previous</button>
-        <button>Next</button>
+        <button>{'<'}</button>
+        <button>{'>'}</button>
       </div>
     </div>
   );
