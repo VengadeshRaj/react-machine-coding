@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import '../../styles/timer.css'
 
 const Timer = () => {
   const [timerValue, setTimerValue] = useState(0);
@@ -21,15 +22,20 @@ const Timer = () => {
   };
 
   return (
-    <div>
-      <h1>{timerValue}</h1>
-      <button onClick={() => startClick()} className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Start</button>
+    <div className="timer">
+      <div>
+      <h1>Timer</h1>
+      <h2 >{timerValue}</h2>
+      </div>
+      <div>
+      <button onClick={() => startClick()}>Start</button>
       <button disabled={!timerStarted} onClick={() => stopClick()}>
         Stop
       </button>
       <button disabled={!timerStarted} onClick={() => resetClick()}>
         reset
       </button>
+      </div>
     </div>
   );
 };

@@ -1,16 +1,14 @@
 import React from "react";
-import Timer from "../components/Timer";
+import Timer from "../components/topics/Timer";
+import Footer from "../components/Footer";
 
 const HomePage = () => {
   return (
-    <div>
+    <div className="home-page">
       <div>
         <Timer />
       </div>
-      <div>
-        <button>{"<"}</button>
-        <button>{">"}</button>
-      </div>
+      <Footer />
     </div>
   );
 };
