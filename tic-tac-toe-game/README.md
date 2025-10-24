@@ -4,6 +4,11 @@ Two players can play at a time. Turns will alternate between them, and each play
 
 ![Tic Tac Toe Game](./src/images/tic-tac-toe.png)
 
+## Prerequisites:
+
+- Node.js installed.
+
 # Technologies Used:
 
 - React JS
+- Tailwind CSS
