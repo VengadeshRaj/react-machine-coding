@@ -1,37 +1,24 @@
 import React, { useEffect, useState } from "react";
 import Card from "./components/Card";
+import {
+  NO_OF_CARDS,
+  CARD_VALUE_OBJ,
+  PATTERNS,
+  SYBOLE_PAIR,
+} from "./constants";
 
-type CardValue = {
+export type CardValue = {
   symbole: "X" | "O" | "";
   isFrozen: boolean;
   isDone: boolean;
 };
 
 const TicTacToeGame = () => {
-  const NO_OF_CARDS = 9;
-  const CARD_VALUE_OBJ: CardValue = {
-    symbole: "",
-    isFrozen: false,
-    isDone: false,
-  };
-  const SYBOLE_PAIR: any = {
-    X: "O",
-    O: "X",
-  };
-
-  const PATTERNS = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [1, 4, 7],
-    [2, 4, 6],
-    [0, 4, 8],
-    [0, 3, 6],
-    [2, 5, 8],
-  ];
   const [symbole, setSymbole] = useState<"X" | "O" | "">("X");
   const [cardValues, setCardValues] = useState<CardValue[]>([]);
   const [isGameComplete, setIsGameComplete] = useState(false);
+  const isMatchDraw =
+    !isGameComplete && cardValues.every((card) => card.symbole);
 
   useEffect(() => {
     const initialCardValues = [];
@@ -86,13 +73,27 @@ const TicTacToeGame = () => {
       />
     ));
   return (
-    <div className="flex flex-col items-center gap-5 font-bold text-3xl p-10 font-mono">
+    <div className="flex flex-col h-screen justify-center items-center gap-5 font-bold text-3xl p-10 font-mono">
       <h1>Tic Tac Toe!</h1>
       <div className="flex flex-row gap-2 flex-wrap w-[350px]">
         {buildCards()}
       </div>
-      <div>
-        {isGameComplete && <h1 className="lg:text-5xl animate-bounce p-10">Player {SYBOLE_PAIR[symbole]} Won!🎉</h1>}
+      <div className="flex flex-col items-center">
+        {isGameComplete && (
+          <h1 className="lg:text-5xl animate-bounce p-10">
+            Player {SYBOLE_PAIR[symbole]} Won!🎉
+          </h1>
+        )}
+        {isMatchDraw && (
+          <h1 className="lg:text-5xl animate-bounce p-10">
+            Match Draw! Try Again!🤓
+          </h1>
+        )}
+        {(isGameComplete || isMatchDraw) && (
+          <button className="text-base bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Try again
+          </button>
+        )}
       </div>
     </div>
   );
