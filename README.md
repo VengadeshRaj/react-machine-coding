@@ -8,7 +8,13 @@ Please go through the `README.md` of each folder before jumping into the solutio
 
 - Node.js installed.
 
-# Common Technologies Used:
+## Common Technologies Used:
 
 - React JS
 - Tailwind CSS
+
+## List of Machine Coding Topics:
+
+| Topic Name | Description |
+|---|---|
+| find-pair-card | A memory game based upon the numbers in pair of cards. |
