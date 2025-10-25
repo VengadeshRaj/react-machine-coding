@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import NoItemsCard from "./components/NoItemsCard";
+import LeftArrow from "./components/LeftArrow";
+import RightArrow from "./components/RightArrow";
 
-type ArrowType = {
+export type ArrowType = {
   onClick: (index: number) => void;
   itemIndex: number;
 };
@@ -18,44 +21,6 @@ const ToDoList = () => {
     inProgress: [],
     done: [],
   });
-
-  const LeftArrow = ({ onClick, itemIndex }: ArrowType) => (
-    <div onClick={() => onClick(itemIndex)}>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className="size-6"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18"
-        />
-      </svg>
-    </div>
-  );
-
-  const RightArrow = ({ onClick, itemIndex }: ArrowType) => (
-    <div onClick={() => onClick(itemIndex)}>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className="size-6"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
-        />
-      </svg>
-    </div>
-  );
 
   const moveItemForward = (
     itemIndex: number,
@@ -107,45 +72,58 @@ const ToDoList = () => {
     }
   };
 
-  const buildToDoItems = () => (
-    <ul className="text-center border border-gray-500 rounded bg-zinc-100 divide-y-2 divide-gray-600 ">
-      {workItems.toDo.map((workItem, i) => (
-        <li className="flex  justify-between">
-          <span className="p-2">{workItem}</span>
-          <RightArrow
-            onClick={(i) => moveItemForward(i, "toDo")}
-            itemIndex={i}
-          />
-        </li>
-      ))}
-    </ul>
-  );
-  const buildInProgressItems = () => (
-    <ul className="text-center border border-gray-500 rounded bg-zinc-100 bg-yellow-100 divide-y-2 divide-gray-600">
-      {workItems.inProgress.map((workItem, i) => (
-        <li className="flex justify-between">
-          <LeftArrow
-            onClick={(i) => moveItemBackward(i, "inProgress")}
-            itemIndex={i}
-          />
-          <span className="p-2">{workItem}</span>
-          <RightArrow
-            onClick={(i) => moveItemForward(i, "inProgress")}
-            itemIndex={i}
-          />
-        </li>
-      ))}
-    </ul>
-  );
-  const buildDoneItems = () => (
-    <ul className="text-center border border-gray-500 rounded bg-zinc-100 divide-y-2 divide-gray-600 bg-green-300">
-      {workItems.done.map((workItem) => (
-        <li className="flex justify-between line-through">
-          <span className="p-2">{workItem}</span>
-        </li>
-      ))}
-    </ul>
-  );
+  const buildToDoItems = () => {
+    if (!workItems.toDo.length) return <NoItemsCard />;
+
+    return (
+      <ul className="text-center border border-gray-500 rounded bg-zinc-100 divide-y-2 divide-gray-600 ">
+        {workItems.toDo.map((workItem, i) => (
+          <li className="flex  justify-between">
+            <span className="p-2">{workItem}</span>
+            <RightArrow
+              onClick={(i) => moveItemForward(i, "toDo")}
+              itemIndex={i}
+            />
+          </li>
+        ))}
+      </ul>
+    );
+  };
+
+  const buildInProgressItems = () => {
+    if (!workItems.inProgress.length) return <NoItemsCard />;
+
+    return (
+      <ul className="text-center border border-gray-500 rounded bg-zinc-100 bg-yellow-100 divide-y-2 divide-gray-600">
+        {workItems.inProgress.map((workItem, i) => (
+          <li className="flex justify-between">
+            <LeftArrow
+              onClick={(i) => moveItemBackward(i, "inProgress")}
+              itemIndex={i}
+            />
+            <span className="p-2">{workItem}</span>
+            <RightArrow
+              onClick={(i) => moveItemForward(i, "inProgress")}
+              itemIndex={i}
+            />
+          </li>
+        ))}
+      </ul>
+    );
+  };
+  const buildDoneItems = () => {
+    if (!workItems.done.length) return <NoItemsCard />;
+      
+    return (
+      <ul className="text-center border border-gray-500 rounded bg-zinc-100 divide-y-2 divide-gray-600 bg-green-300">
+        {workItems.done.map((workItem) => (
+          <li className="flex justify-between line-through">
+            <span className="p-2">{workItem}</span>
+          </li>
+        ))}
+      </ul>
+    );
+  };
 
   const addButtonClick = () => {
     setWorkItems({ ...workItems, toDo: [...workItems.toDo, newItem] });
