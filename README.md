@@ -20,3 +20,4 @@ Please go through the `README.md` of each folder before jumping into the solutio
 | find-pair-card | A memory game based upon the numbers in pair of cards. |
 | stopwatch | A stopwatch app, User can able to start, stop and reset the timer. |
 | tic-tac-toe | Popular two player game, player has to mark the symbole(X or O) in order of straight or cross. |
+| to-do-list | Users can add new to-do items and move them through the stages, To Do, In Progress, and Done |
