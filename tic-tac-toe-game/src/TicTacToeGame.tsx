@@ -56,7 +56,6 @@ const TicTacToeGame = () => {
       return card;
     });
     const checkedCardValues = checkGameStatus(newCardValues);
-    console.log("checkedCardValues", checkedCardValues);
     setCardValues([...checkedCardValues]);
     setSymbole(SYBOLE_PAIR[symbole]);
   };
