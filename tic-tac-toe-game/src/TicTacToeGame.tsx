@@ -21,12 +21,17 @@ const TicTacToeGame = () => {
     !isGameComplete && cardValues.every((card) => card.symbole);
 
   useEffect(() => {
+    startGame();
+  }, []);
+
+  const startGame = () => {
     const initialCardValues = [];
     for (let i = 0; i < NO_OF_CARDS; i++) {
       initialCardValues.push(CARD_VALUE_OBJ);
     }
     setCardValues(initialCardValues);
-  }, []);
+    setIsGameComplete(false)
+  };
 
   const checkGameStatus = (newCardValues: CardValue[]): CardValue[] => {
     for (let i = 0; i < PATTERNS.length; i++) {
@@ -89,7 +94,8 @@ const TicTacToeGame = () => {
           </h1>
         )}
         {(isGameComplete || isMatchDraw) && (
-          <button className="text-base bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <button className="text-base bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={()=> startGame()}>
             Try again
           </button>
         )}
