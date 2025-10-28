@@ -23,3 +23,4 @@ Please go through the `README.md` of each folder before jumping into the solutio
 | to-do-list | Users can add new to-do items and move them through the stages, To Do, In Progress, and Done |
 | traffic-light | A similar implementation of a traffic light signal can be seen on roads |
 | otp-login | A 4-digit OTP input component with auto-focus and seamless cursor navigation.|
+| progress-bar | A progress bar loader automatically increments from 0% to 100%.|
