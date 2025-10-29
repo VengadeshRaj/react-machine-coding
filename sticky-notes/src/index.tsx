@@ -1,15 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import "./styles/sticky-notes.css";
+import "./styles/note.css";
 import reportWebVitals from './reportWebVitals';
+import StickyNotes from './StickyNotes';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <StickyNotes />
   </React.StrictMode>
 );
 

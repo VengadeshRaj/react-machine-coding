@@ -1,0 +1,12 @@
+.note-container{
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    background-color: lightyellow;
+    padding: 5px;
+    border: 1px solid black ;
+    border-radius: 2px;
+    font-size: smaller;
+    cursor: move;
+    user-select: none;
+}
