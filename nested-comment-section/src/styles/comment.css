@@ -1,0 +1,19 @@
+.comment-container {
+  width: 800px;
+  background-color: rgb(189, 217, 235);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.comment-btn-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding-top: 10px;
+}
+
+.reply-comment-input {
+  width: 80%;
+  height: 100px;
+  margin: 10px 10px 10px 30px;
+}

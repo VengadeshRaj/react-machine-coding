@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import "./styles/sticky-notes.css";
-import "./styles/note.css";
+import './styles/global.css';
+import './styles/comment-section.css'
 import reportWebVitals from './reportWebVitals';
-import StickyNotes from './StickyNotes';
+import NestedCommentSection from './CommentSection';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <StickyNotes />
+    <NestedCommentSection />
   </React.StrictMode>
 );
 
