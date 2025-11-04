@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import Comment from "./components/Comment";
 import Button from "./components/Button";
 
-interface Comment {
+export interface CommentType {
   index: number;
   commentMessage: string;
-  vote: number;
-  date: number;
-  time: number;
+  votes: number;
+  date: string;
+  time: string;
 }
 
-export interface Comments extends Comment{
-  replies: Comment[];
+export interface Comments extends CommentType{
+  replies: CommentType[];
 };
 
 const NestedCommentSection = () => {
@@ -25,9 +25,9 @@ const NestedCommentSection = () => {
         {
           index: prev.length,
           commentMessage: newComment,
-          vote: 0,
-          date: new Date().getDate(),
-          time: new Date().getTime(),
+          votes: 0,
+          date: new Date().toLocaleDateString(),
+          time: new Date().toLocaleTimeString(),
           replies: [],
         },
       ]);
@@ -54,11 +54,12 @@ const NestedCommentSection = () => {
           <Comment
             comments= {comments}
             comment={c.commentMessage}
-            votes={c.vote}
+            votes={c.votes}
             date={c.date}
             time={c.time}
             index={index}
             setComments={setComments}
+            replies= {c.replies}
           />
         ))}
       </div>

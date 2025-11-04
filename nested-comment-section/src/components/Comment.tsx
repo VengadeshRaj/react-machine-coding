@@ -1,21 +1,24 @@
 import React, { useState } from "react";
 import Button from "./Button";
 import "../styles/comment.css";
-import { Comments } from "../CommentSection";
+import { Comments, CommentType } from "../CommentSection";
 
 type CommentProps = {
   comments: Comments[];
   comment: string;
   setComments: any;
   votes: number;
-  date: number;
-  time: number;
+  date: string;
+  time: string;
   index: number;
+  replies: CommentType[];
 };
 
 const Comment = (props: CommentProps) => {
-  const { comment, votes, date, time, index, comments, setComments } = props;
+  const { comment, votes, date, time, index, comments, setComments, replies } =
+    props;
   const [replyComment, setReplyComment] = useState("");
+  const [updateComment, setUpdateComment] = useState("");
   const [isReplyEnabled, setIsReplyEnabled] = useState(false);
   const [isEditEnabled, setIsEditEnabled] = useState(false);
 
@@ -25,9 +28,12 @@ const Comment = (props: CommentProps) => {
   };
 
   const editClick = () => {
+    setUpdateComment(comment);
     setIsEditEnabled(true);
     setIsReplyEnabled(false);
   };
+
+  const editReplyClick=()=>{}
 
   const submitReplyClick = () => {
     const updatedComments = comments.map((data, i) => {
@@ -37,9 +43,9 @@ const Comment = (props: CommentProps) => {
           {
             index: data.replies.length,
             commentMessage: replyComment,
-            vote: 0,
-            date: new Date().getDate(),
-            time: new Date().getTime(),
+            votes: 0,
+            date: new Date().toLocaleDateString(),
+            time: new Date().toLocaleTimeString(),
           },
         ];
       }
@@ -50,6 +56,24 @@ const Comment = (props: CommentProps) => {
     setIsReplyEnabled(false);
     setComments([...updatedComments]);
   };
+
+  const getReplies = () =>
+    replies.map((r) => (
+      <div className="reply-container">
+        {r.commentMessage}
+        <div>Votes : {r.votes}</div>
+        <div>
+          {r.date}, {r.time}
+        </div>
+        <div className="comment-btn-container">
+          <Button text={"👍"} />
+          <Button text={"👎"} />
+          <Button text="Reply" onClick={replyClick} />
+          <Button text={"Edit"} onClick={editReplyClick} />
+          <Button text={"Delete"} />
+        </div>
+      </div>
+    ));
 
   return (
     <div className="comment-container">
@@ -66,6 +90,7 @@ const Comment = (props: CommentProps) => {
           <Button text={"Edit"} onClick={editClick} />
           <Button text={"Delete"} />
         </div>
+        {getReplies()}
       </div>
       {isReplyEnabled && (
         <>
@@ -79,11 +104,14 @@ const Comment = (props: CommentProps) => {
       )}
       {isEditEnabled && (
         <div>
-          <input className="reply-comment-input" />
+          <input
+            className="reply-comment-input"
+            value={updateComment}
+            onChange={(e) => setUpdateComment(e.target.value)}
+          />
           <Button text="Update Comment" />
         </div>
       )}
-      
     </div>
   );
 };
