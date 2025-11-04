@@ -1,13 +1,23 @@
 import React, { useState } from "react";
 
 const StopWatch = () => {
-  const [timerValue, setTimerValue] = useState<number>(0);
+  const [timerValue, setTimerValue] = useState(0);
   const [intervalId, setIntervalId] = useState<any>(null);
+
+  function formatTime(seconds:number) {
+  const hrs = Math.floor(seconds / 3600);
+  const mins = Math.floor((seconds % 3600) / 60);
+  const secs = seconds % 60;
+    
+  return [hrs, mins, secs]
+    .map(unit => String(unit).padStart(2, '0'))
+    .join(':');
+}
 
   const startClick = () => {
     if (!intervalId) {
       const intrId = setInterval(() => {
-        setTimerValue((prev) => prev + 1);
+        setTimerValue((prev)=>prev + 1);
       }, 1000);
       setIntervalId(intrId);
     }
@@ -26,12 +36,14 @@ const StopWatch = () => {
       <h1 className="text-5xl p-5">Stopwatch!</h1>
       <div>
         <div>
-          <h3 className="text-center text-3xl">Timer : {timerValue}</h3>
+          <h3 className="text-center text-3xl">
+            Timer : {formatTime(timerValue)}
+          </h3>
         </div>
         <div className="flex flex-row gap-3 m-10">
           <button
             className={`${
-              !!timerValue ? "bg-blue-300" : "bg-blue-600 hover:bg-blue-700"
+             !!timerValue ? "bg-blue-300" : "bg-blue-600 hover:bg-blue-700"
             }  text-white font-bold py-2 px-4 rounded`}
             onClick={startClick}
             disabled={!!timerValue}
