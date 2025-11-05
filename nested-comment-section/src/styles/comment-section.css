@@ -10,3 +10,18 @@
    height: 100px;
 }
 
+.comment-container {
+  width: 800px;
+  background-color: rgb(189, 217, 235);
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.reply-container {
+  margin-left: 20px;
+  padding: 10px 5px;
+  border-left: 1px solid gray;
+  
+}
+
