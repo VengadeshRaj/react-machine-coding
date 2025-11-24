@@ -25,3 +25,4 @@ Please go through the `README.md` of each folder before jumping into the solutio
 | otp-login | A 4-digit OTP input component with auto-focus and seamless cursor navigation.|
 | progress-bar | A progress bar loader automatically increments from 0% to 100%.|
 | nested-comment-section | A Nested comment section, User can able to add,edit,up-vote,down-vote,delete comment and its replies.|
+| searchable-text-box | A searchable text box that allows users to look up fruits, displaying dynamic suggestions based on their input used debouncing mechanism to minimize unnecessary event triggers.|
