@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-, "constants.ts"  ]
+, "src/constants.ts"  ]
 }
