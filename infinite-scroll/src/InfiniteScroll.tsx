@@ -6,7 +6,7 @@ import Loader from "./components/Loader";
 export default function InfiniteScroll() {
   const [tableValues, setTableValues] = useState({
     headers: ["Company", "Location", "Type"],
-    body: [["Google", "Bangalore", "Full-Time"]],
+    body: [[]],
   });
   const [isLoading, setIsLoading] = useState(false);
 
@@ -36,6 +36,7 @@ export default function InfiniteScroll() {
   return (
     <div className="flex flex-col gap-5 bg-gray-100">
       <h1 className="font-bold text-center text-2xl mt-5">Company Details</h1>
+      <h3 className="font-bold text-center text-xl">No of Records: {tableValues.body.length}</h3>
       <Table headers={tableValues.headers} items={tableValues.body} />
       <Loader isLoading={isLoading} message="loading" />
     </div>
