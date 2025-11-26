@@ -1,4 +1,4 @@
-const COMPANY_RECORDS =[
+const COMPANY_RECORDS = [
   ["Google", "Bangalore", "Full-Time"],
   ["Amazon", "Hyderabad", "Contract"],
   ["Microsoft", "Noida", "Full-Time"],
@@ -8,15 +8,15 @@ const COMPANY_RECORDS =[
   ["Accenture", "Mumbai", "Full-Time"],
   ["IBM", "Hyderabad", "Remote"],
   ["Oracle", "Gurgaon", "Full-Time"],
-  ["HCL", "Noida", "Internship"]
-]
+  ["HCL", "Noida", "Internship"],
+];
 
-export const getCompanyRecords =()=>{
-    return new Promise((resolve)=>{
-        setTimeout(()=>{
-            resolve(COMPANY_RECORDS)
-        },5000)
-    }
-        
-    )
-}
+const API_DELAY_TIME = 2000;
+
+export const getCompanyRecords = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(COMPANY_RECORDS);
+    }, API_DELAY_TIME);
+  });
+};
