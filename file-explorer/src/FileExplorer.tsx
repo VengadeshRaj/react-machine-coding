@@ -4,6 +4,7 @@ import { Folder, DataFile } from "./components";
 interface item {
   type: "folder" | "file" | "inputFolder" | "inputFile";
   children?: item | {};
+  path: string[] | undefined;
 }
 
 interface Items {
@@ -25,11 +26,14 @@ export default function FileExplorer() {
       children: {
         test: {
           type: "file",
+          path: ["src", "test"],
         },
       },
+      path: ["src"],
     },
     "package.json": {
       type: "file",
+      path: ["package.json"],
     },
   });
 
@@ -45,27 +49,58 @@ export default function FileExplorer() {
   const inputOnBlur = (
     folderKey: string,
     value: string,
-    type: "folder" | "file"
+    type: "folder" | "file",
+    path: string[] | undefined
   ) => {
+    const testResult = addItemToPath(path, items, value, "folder");
+    console.log("testResult", testResult);
+
     const itemCopy = JSON.parse(JSON.stringify(items));
     delete itemCopy[folderKey].children[folderKey];
     itemCopy[folderKey].children[value] = DEFAULT_NEW_ITEM_VALUE[type];
     setItems({ ...itemCopy });
   };
 
-  const addNewFolder = (folderKey: string) => {
+  const addItemToPath = (
+    path: string[] | undefined,
+    itemObj: any,
+    newItemName: string,
+    type: "file" | "folder"
+  ) => {
+    let newObj = {};
+    if (!path || !itemObj[path[0]]) {
+      itemObj[newItemName] = { newItemName: DEFAULT_NEW_ITEM_VALUE[type] };
+      newObj = { ...itemObj };
+    } else {
+      newObj = addItemToPath(
+        path.slice(1),
+        itemObj[path[0]],
+        newItemName,
+        type
+      );
+    }
+    return newObj;
+  };
+
+  const addNewFolder = (folderKey: string, path: string[] | undefined) => {
     const itemCopy = JSON.parse(JSON.stringify(items));
     itemCopy[folderKey].children = {
       ...itemCopy[folderKey].children,
-      [folderKey]: { type: "inputFolder" },
+      [folderKey]: {
+        type: "inputFolder",
+        path: path ? [...path, folderKey] : [folderKey],
+      },
     };
     setItems({ ...itemCopy });
   };
-  const addNewFile = (folderKey: string) => {
+  const addNewFile = (folderKey: string, path: string[] | undefined) => {
     const itemCopy = JSON.parse(JSON.stringify(items));
     itemCopy[folderKey].children = {
       ...itemCopy[folderKey].children,
-      [folderKey]: { type: "inputFile" },
+      [folderKey]: {
+        type: "inputFile",
+        path: path ? [...path, folderKey] : [folderKey],
+      },
     };
     setItems({ ...itemCopy });
   };
@@ -88,8 +123,8 @@ export default function FileExplorer() {
             <Folder
               name={key}
               children={renderChildren(listItems[key]?.children)}
-              addNewFolder={() => addNewFolder(key)}
-              addNewFile={() => addNewFile(key)}
+              addNewFolder={() => addNewFolder(key, listItems[key].path)}
+              addNewFile={() => addNewFile(key, listItems[key].path)}
             />
           );
         case "inputFolder":
@@ -98,7 +133,14 @@ export default function FileExplorer() {
               <span>📂</span>
               <input
                 className="border border-black"
-                onBlur={(e) => inputOnBlur(key, e.target.value, "folder")}
+                onBlur={(e) =>
+                  inputOnBlur(
+                    key,
+                    e.target.value,
+                    "folder",
+                    listItems[key].path
+                  )
+                }
               />
             </>
           );
@@ -108,7 +150,9 @@ export default function FileExplorer() {
               <span>📄</span>
               <input
                 className="border border-black"
-                onBlur={(e) => inputOnBlur(key, e.target.value, "file")}
+                onBlur={(e) =>
+                  inputOnBlur(key, e.target.value, "file", listItems[key].path)
+                }
               />
             </>
           );
