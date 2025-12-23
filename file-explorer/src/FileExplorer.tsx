@@ -1,15 +1,17 @@
 import React, { ReactElement, ReactNode, useEffect, useState } from "react";
 import { Folder, DataFile } from "./components";
 
-interface item {
+interface Item {
   type: "folder" | "file" | "inputFolder" | "inputFile";
-  children?: item | {};
+  children: Item | {};
   path: string[] | undefined;
 }
 
-interface Items {
-  [key: string]: item;
-}
+// interface Items {
+//   [key: string]: {
+//     children: item;
+//   };
+// }
 
 export default function FileExplorer() {
   const itemsRef = React.useRef<HTMLUListElement>(null);
@@ -20,21 +22,26 @@ export default function FileExplorer() {
       children: {},
     },
   };
-  const [items, setItems] = useState<Items>({
-    src: {
-      type: "folder",
-      children: {
-        test: {
-          type: "file",
-          path: ["src", "test"],
+  const [items, setItems] = useState<Item>({
+    children: {
+      src: {
+        type: "folder",
+        children: {
+          test: {
+            type: "file",
+            path: ["src", "test"],
+            children:{}
+          },
         },
+        path: ["src"],
       },
-      path: ["src"],
+      "package.json": {
+        type: "file",
+        path: ["package.json"],
+      },
     },
-    "package.json": {
-      type: "file",
-      path: ["package.json"],
-    },
+    type:"folder",
+    path :[]
   });
 
   useEffect(() => {
@@ -56,8 +63,8 @@ export default function FileExplorer() {
     console.log("testResult", testResult);
 
     const itemCopy = JSON.parse(JSON.stringify(items));
-    delete itemCopy[folderKey].children[folderKey];
-    itemCopy[folderKey].children[value] = DEFAULT_NEW_ITEM_VALUE[type];
+    delete itemCopy.children[folderKey].children[folderKey];
+    itemCopy.children[folderKey].children[value] = DEFAULT_NEW_ITEM_VALUE[type];
     setItems({ ...itemCopy });
   };
 
@@ -82,21 +89,43 @@ export default function FileExplorer() {
     return newObj;
   };
 
+  function addNewEle (items:any,path:any,orginalPath:any,newEle:any){
+  const pathName = path.shift();
+  if (path.length >0){
+    addNewEle(items.children[pathName],path,orginalPath,newEle)
+  }
+  else {
+    // items.children ={}
+    items.children[pathName] = {...items.children[pathName],[pathName]:newEle};
+  }
+  return items;
+  
+}
+
   const addNewFolder = (folderKey: string, path: string[] | undefined) => {
     const itemCopy = JSON.parse(JSON.stringify(items));
-    itemCopy[folderKey].children = {
-      ...itemCopy[folderKey].children,
-      [folderKey]: {
+    const newEle = {
+         [folderKey]: {
         type: "inputFolder",
         path: path ? [...path, folderKey] : [folderKey],
       },
-    };
-    setItems({ ...itemCopy });
+    }
+    // itemCopy.children[folderKey].children = {
+    //   ...itemCopy.children[folderKey].children,
+    //   [folderKey]: {
+    //     type: "inputFolder",
+    //     path: path ? [...path, folderKey] : [folderKey],
+    //   },
+    // };
+    const newItems = addNewEle(itemCopy,path,path,newEle);
+    console.log("items",items)
+    console.log("newItems",newItems);
+    //setItems({ ...itemCopy });
   };
   const addNewFile = (folderKey: string, path: string[] | undefined) => {
     const itemCopy = JSON.parse(JSON.stringify(items));
-    itemCopy[folderKey].children = {
-      ...itemCopy[folderKey].children,
+    itemCopy.children[folderKey].children = {
+      ...itemCopy.children[folderKey].children,
       [folderKey]: {
         type: "inputFile",
         path: path ? [...path, folderKey] : [folderKey],
@@ -105,62 +134,63 @@ export default function FileExplorer() {
     setItems({ ...itemCopy });
   };
 
-  const renderChildren = (children: item | ReactNode | {}) => {
+  const renderChildren = (children: Item | ReactNode | {}) => {
     if (React.isValidElement(children)) {
       return children;
     } else if (typeof children === "object") {
-      return buildItems(children as Items);
+      return buildItems(children as Item);
     }
 
     return {};
   };
 
-  const buildItems = (listItems: Items): ReactNode => {
-    return Object.entries(listItems).map(([key], i) => {
-      switch (listItems[key].type) {
-        case "folder":
-          return (
-            <Folder
-              name={key}
-              children={renderChildren(listItems[key]?.children)}
-              addNewFolder={() => addNewFolder(key, listItems[key].path)}
-              addNewFile={() => addNewFile(key, listItems[key].path)}
+const buildItems = (listItems: Item): ReactNode => {
+  if (!listItems.children) return null;
+
+  return Object.entries(listItems.children).map(([key, item]) => {
+    switch (item.type) {
+      case "folder":
+        return (
+          <Folder
+            key={key}
+            name={key}
+            children={renderChildren(item)}
+            addNewFolder={() => addNewFolder(key, item.path)}
+            addNewFile={() => addNewFile(key, item.path)}
+          />
+        );
+
+      case "inputFolder":
+        return (
+          <div key={key}>
+            <span>📂</span>
+            <input
+              className="border border-black"
+              onBlur={(e) =>
+                inputOnBlur(key, e.target.value, "folder", item.path)
+              }
             />
-          );
-        case "inputFolder":
-          return (
-            <>
-              <span>📂</span>
-              <input
-                className="border border-black"
-                onBlur={(e) =>
-                  inputOnBlur(
-                    key,
-                    e.target.value,
-                    "folder",
-                    listItems[key].path
-                  )
-                }
-              />
-            </>
-          );
-        case "inputFile":
-          return (
-            <>
-              <span>📄</span>
-              <input
-                className="border border-black"
-                onBlur={(e) =>
-                  inputOnBlur(key, e.target.value, "file", listItems[key].path)
-                }
-              />
-            </>
-          );
-        default:
-          return <DataFile name={key} />;
-      }
-    });
-  };
+          </div>
+        );
+
+      case "inputFile":
+        return (
+          <div key={key}>
+            <span>📄</span>
+            <input
+              className="border border-black"
+              onBlur={(e) =>
+                inputOnBlur(key, e.target.value, "file", item.path)
+              }
+            />
+          </div>
+        );
+
+      default:
+        return <DataFile key={key} name={key} />;
+    }
+  });
+};
 
   return (
     <div className="flex flex-col items-left bg-gray-100 h-screen p-5 w-[500px] gap-2">
