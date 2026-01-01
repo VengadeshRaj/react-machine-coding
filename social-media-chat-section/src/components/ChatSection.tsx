@@ -2,34 +2,15 @@ import { useState } from "react";
 import ArrowButton from "./ArrowButton";
 import Chat from "./Chat";
 import Profile from "./Profile";
+import SearchBox from "./SearchBox";
+import { ChatData } from "../HomePage";
 
-type chat = {
-  message: string;
-  date: string;
-  isOwn: boolean;
-};
-type ChatData = {
-  name: string;
-  chats: chat[];
-  recentMessage: string;
-  recentChatDate: string;
+type ChatSection = {
+  chatData: ChatData[];
+  onChatClick :(chatId:number)=> void;
 };
 
-export default function ChatSection() {
-  const [chatData, setChatData] = useState<ChatData[]>([
-    {
-      name: "Vengadesh Raj",
-      chats: [
-        {
-          message: "Hey there..",
-          date: "Dec 28, 2025",
-          isOwn: false,
-        },
-      ],
-      recentMessage: "Hey there..",
-      recentChatDate: "Dec 28, 2025",
-    },
-  ]);
+export default function ChatSection({ chatData,onChatClick }: ChatSection) {
   const [isChatOpen, setIsChatOpen] = useState(false);
 
   const buildChatData = () =>
@@ -38,11 +19,13 @@ export default function ChatSection() {
         name={c.name}
         recentChatDate={c.recentChatDate}
         recentMessage={c.recentMessage}
+        chatId={c.chatId}
+        onClick={(id) => onChatClick(id)}
       />
     ));
 
   return (
-    <div className="absolute bottom-0 right-1 bg-gray-900 text-white w-[450px] rounded-t-lg">
+    <div className="bg-gray-900 text-white w-[450px] rounded-t-lg">
       <div
         className="flex w-full hover:bg-gray-800 cursor-pointer rounded-t-lg border-b border-white/50"
         onClick={() => setIsChatOpen((prev) => !prev)}
@@ -56,7 +39,12 @@ export default function ChatSection() {
           />
         </span>
       </div>
-      {isChatOpen && <div>{buildChatData()}</div>}
+      {isChatOpen && (
+        <div>
+          <SearchBox />
+          {buildChatData()}
+        </div>
+      )}
     </div>
   );
 }
