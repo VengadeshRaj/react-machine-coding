@@ -7,10 +7,10 @@ import { ChatData } from "../HomePage";
 
 type ChatSection = {
   chatData: ChatData[];
-  onChatClick :(chatId:number)=> void;
+  onChatClick: (chatId: number) => void;
 };
 
-export default function ChatSection({ chatData,onChatClick }: ChatSection) {
+export default function ChatSection({ chatData, onChatClick }: ChatSection) {
   const [isChatOpen, setIsChatOpen] = useState(false);
 
   const buildChatData = () =>

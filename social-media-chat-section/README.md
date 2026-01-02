@@ -2,4 +2,9 @@
 
 A usual social media chat section you see on internet
 
-Dev yet to start...
+Dev in progress - Chat modal
+
+# Dev things used:
+
+e.stopPropogation()
+

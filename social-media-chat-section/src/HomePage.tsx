@@ -22,7 +22,7 @@ export interface SelectedChat extends ChatData {
 
 export default function HomePage() {
   const [chatData, setChatData] = useState<ChatData[]>(CHAT_DEFAULT_VALUES);
-  const [selectedChats, setSelectedChats] = useState<SelectedChat[]>();
+  const [selectedChats, setSelectedChats] = useState<SelectedChat[]>([]);
 
   const onChatClick = (chatId: number) => {
     const selectedChat = chatData.filter((c) => c.chatId == chatId);

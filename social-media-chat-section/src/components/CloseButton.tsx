@@ -8,7 +8,8 @@ export default function CloseButton({ onClick }: CloseButtonProps) {
   return (
     <button
       className="cursor-pointer p-1 hover:bg-gray-700 rounded-full"
-      onClick={() => onClick}
+      onClick={(e) => {e.stopPropagation();
+        onClick()}}
     >
       <svg
         width={SIZE}

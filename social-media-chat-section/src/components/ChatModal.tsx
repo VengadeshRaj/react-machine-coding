@@ -14,8 +14,14 @@ type ChatModal = {
 };
 
 export default function ChatModal(props: ChatModal) {
-  const { chatId, name, isMessageVisible, messages, onModalHeaderClick,onCloseClick } =
-    props;
+  const {
+    chatId,
+    name,
+    isMessageVisible,
+    messages,
+    onModalHeaderClick,
+    onCloseClick,
+  } = props;
 
   const buildMessages = () =>
     messages.map((m) => (
