@@ -10,7 +10,6 @@ export default function StickyNotes() {
   const [notes, setNotes] = useState<NoteType[]>([]);
 
   const addNewNote = (newNote: any) => {
-    debugger
     setNotes((prev) => [
       ...prev,
       { position: newNote.position, message: newNote.message },
