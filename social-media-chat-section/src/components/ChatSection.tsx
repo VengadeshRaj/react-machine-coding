@@ -24,6 +24,10 @@ export default function ChatSection({ chatData, onChatClick }: ChatSection) {
       />
     ));
 
+    const onSearchCommit =(value:string)=>{
+
+    }
+
   return (
     <div className="bg-gray-900 text-white w-[300px] rounded-t-lg">
       <div
