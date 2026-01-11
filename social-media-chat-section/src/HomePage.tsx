@@ -30,7 +30,7 @@ export default function HomePage() {
     if (isAlreadySelected?.length) return;
 
     if (!selectedChats || selectedChats?.length <= 3) {
-      const selectedChatObj = { ...selectedChat[0], isMessageVisible: false };
+      const selectedChatObj = { ...selectedChat[0], isMessageVisible: true };
       const newSelectesChats = JSON.parse(JSON.stringify(selectedChats || []));
       setSelectedChats(() => [...newSelectesChats, selectedChatObj]);
     }
@@ -68,8 +68,8 @@ export default function HomePage() {
   return (
     <div className="relative flex flex-col bg-gray-100 items-center h-screen justify-center">
       <div className="font-bold text-xl">Newsfeed will flow here..</div>
-      <div className="absolute bottom-0 right-1 flex flex-row">
-        <div className="self-end flex flex-row gap-1">
+      <div className="absolute bottom-0 right-1 flex flex-row items-end">
+        <div className="self-end flex flex-row gap-1 items-end">
           {buildSelectedChats()}
         </div>
         <ChatSection

@@ -8,3 +8,9 @@ Dev in progress - Chat modal
 
 e.stopPropogation()
 
+## Pending Items:
+
+- Sending message to chats
+- Restrict 3 chat windows
+- Search Message or Person in chat (Complete search feature)
+
