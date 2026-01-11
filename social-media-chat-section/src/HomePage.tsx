@@ -29,10 +29,10 @@ export default function HomePage() {
     const isAlreadySelected = selectedChats?.filter((s) => s.chatId == chatId);
     if (isAlreadySelected?.length) return;
 
-    if (!selectedChats || selectedChats?.length <= 3) {
+    if (!selectedChats || selectedChats?.length < 3) {
       const selectedChatObj = { ...selectedChat[0], isMessageVisible: true };
       const newSelectesChats = JSON.parse(JSON.stringify(selectedChats || []));
-      setSelectedChats(() => [...newSelectesChats, selectedChatObj]);
+      setSelectedChats(() => [selectedChatObj,...newSelectesChats]);
     }
   };
 
@@ -66,7 +66,7 @@ export default function HomePage() {
     ));
 
   return (
-    <div className="relative flex flex-col bg-gray-100 items-center h-screen justify-center">
+    <div className="relative flex flex-col bg-gray-100 items-center h-screen justify-center text-sm">
       <div className="font-bold text-xl">Newsfeed will flow here..</div>
       <div className="absolute bottom-0 right-1 flex flex-row items-end">
         <div className="self-end flex flex-row gap-1 items-end">

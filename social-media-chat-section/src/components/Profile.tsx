@@ -1,6 +1,6 @@
 import DEFAULT_PROFILE from '../images/default_profile.png';
 
-export default function Profile({size=40}) {
+export default function Profile({size=30}) {
   return (
     <div className="p-4">
       <img

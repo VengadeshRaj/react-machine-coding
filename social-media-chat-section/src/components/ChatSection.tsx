@@ -25,13 +25,13 @@ export default function ChatSection({ chatData, onChatClick }: ChatSection) {
     ));
 
   return (
-    <div className="bg-gray-900 text-white w-[450px] rounded-t-lg">
+    <div className="bg-gray-900 text-white w-[300px] rounded-t-lg">
       <div
         className="flex w-full hover:bg-gray-800 cursor-pointer rounded-t-lg border-b border-white/50"
         onClick={() => setIsChatOpen((prev) => !prev)}
       >
         <Profile />
-        <div className="py-5">Messaging</div>
+        <div className="py-5 font-bold">Messaging</div>
         <span className="p-3 ml-auto">
           <ArrowButton
             isOpen={isChatOpen}
