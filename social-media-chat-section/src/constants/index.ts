@@ -69,4 +69,32 @@ export const CHAT_DEFAULT_VALUES = [
     recentMessage: "Had fun?",
     recentChatDate: "Dec 28, 2025",
   },
+   {
+    chatId: 1006,
+    name: "Arthor morgon",
+    chats: [
+      {
+        message: "wanna chat??",
+        date: "Mar 01, 2025",
+        isOwn: false,
+        name: "John",
+      },
+    ],
+    recentMessage: "wanna talk?",
+    recentChatDate: "Dec 28, 2025",
+  },
+  {
+    chatId: 1007,
+    name: "bradon stark",
+    chats: [
+      {
+        message: "shall we proceed??",
+        date: "Mar 01, 2025",
+        isOwn: false,
+        name: "John",
+      },
+    ],
+    recentMessage:"shall we proceed??",
+    recentChatDate: "Dec 28, 2025",
+  },
 ];

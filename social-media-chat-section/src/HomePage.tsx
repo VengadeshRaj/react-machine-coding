@@ -24,16 +24,32 @@ export default function HomePage() {
   const [chatData, setChatData] = useState<ChatData[]>(CHAT_DEFAULT_VALUES);
   const [selectedChats, setSelectedChats] = useState<SelectedChat[]>([]);
 
+  const getModalOpenConfig = () => {
+    if (selectedChats.length < 3) return 3;
+    else if (selectedChats.length == 3) return 2;
+    else return 1;
+  };
+
+  const applyChatOpenConfig = (newSelectedChats: SelectedChat[]) => {
+    const openModalAllowed = getModalOpenConfig();
+    const chats = newSelectedChats.map((c, i) => {
+      if (i < openModalAllowed) {
+        c.isMessageVisible = true;
+      } else c.isMessageVisible = false;
+      return c;
+    });
+
+    setSelectedChats([...chats]);
+  };
+
   const onChatClick = (chatId: number) => {
     const selectedChat = chatData.filter((c) => c.chatId == chatId);
     const isAlreadySelected = selectedChats?.filter((s) => s.chatId == chatId);
     if (isAlreadySelected?.length) return;
-
-    if ( selectedChats?.length < 3) {
-      const selectedChatObj = { ...selectedChat[0], isMessageVisible: true };
-      const newSelectesChats = JSON.parse(JSON.stringify(selectedChats || []));
-      setSelectedChats(() => [selectedChatObj,...newSelectesChats]);
-    }
+    const updatedChats = [{...selectedChat[0],isMessageVisible:true},...selectedChats];
+    if(updatedChats.length > 5) updatedChats.pop();
+    applyChatOpenConfig(updatedChats)
+    
   };
 
   const onChatHeaderClick = (chatId: number) => {
