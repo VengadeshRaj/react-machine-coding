@@ -1,22 +1,16 @@
 import { useRef } from "react";
 
-export default function SearchBox() {
-  const timerRef: any = useRef(null);
+interface SearchBoxProps {
+  onChange:(value:string)=> void
+}
 
-  const debouncedSearch = (value: string) => {
-    if (timerRef?.current) {
-      clearTimeout(timerRef.current.timerId);
-    }
-    timerRef.current = setTimeout(() => {
-      alert(value);
-    }, 3000);
-  };
+export default function SearchBox({onChange}:SearchBoxProps) {
   return (
     <div className="p-2">
       <input
         placeholder="Search messages..."
         className="border bg-gray-700 rounded w-full p-2 hover:ring"
-        onChange={(e) => debouncedSearch(e.target.value)}
+        onChange={(e) => onChange(e.target.value)}
       />
     </div>
   );

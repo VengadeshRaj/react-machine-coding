@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import ArrowButton from "./ArrowButton";
 import Chat from "./Chat";
 import Profile from "./Profile";
@@ -8,9 +8,15 @@ import { ChatData } from "../HomePage";
 type ChatSection = {
   chatData: ChatData[];
   onChatClick: (chatId: number) => void;
+  setChatData: (chat: ChatData[]) => void;
 };
 
-export default function ChatSection({ chatData, onChatClick }: ChatSection) {
+export default function ChatSection({
+  chatData,
+  onChatClick,
+  setChatData,
+}: ChatSection) {
+  const timeRef: any = useRef(null);
   const [isChatOpen, setIsChatOpen] = useState(false);
 
   const buildChatData = () =>
@@ -24,9 +30,24 @@ export default function ChatSection({ chatData, onChatClick }: ChatSection) {
       />
     ));
 
-    const onSearchCommit =(value:string)=>{
+  const onSearchCommit = (searchValue: string) => {
+    if (timeRef.current) clearTimeout(timeRef.current);
 
-    }
+    timeRef.current = setTimeout(() => {
+      const similarChats = chatData.reduce((acc: any, value, i) => {
+        const chats =  value.chats.map((c) =>
+          c.message
+            .toLocaleLowerCase()
+            .startsWith(searchValue.toLocaleLowerCase())
+        );
+        if(chats.length >0) acc.push(value.chatId)
+        return acc;
+      },[]);
+
+      const suggestions = chatData.filter((c) => similarChats.includes(c.chatId));
+      setChatData([...suggestions]);
+    }, 3000);
+  };
 
   return (
     <div className="bg-gray-900 text-white w-[300px] rounded-t-lg">
@@ -45,7 +66,7 @@ export default function ChatSection({ chatData, onChatClick }: ChatSection) {
       </div>
       {isChatOpen && (
         <div>
-          <SearchBox />
+          <SearchBox onChange={(value)=>onSearchCommit(value)}/>
           {buildChatData()}
         </div>
       )}
