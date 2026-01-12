@@ -29,7 +29,7 @@ export default function HomePage() {
     const isAlreadySelected = selectedChats?.filter((s) => s.chatId == chatId);
     if (isAlreadySelected?.length) return;
 
-    if (!selectedChats || selectedChats?.length < 3) {
+    if ( selectedChats?.length < 3) {
       const selectedChatObj = { ...selectedChat[0], isMessageVisible: true };
       const newSelectesChats = JSON.parse(JSON.stringify(selectedChats || []));
       setSelectedChats(() => [selectedChatObj,...newSelectesChats]);

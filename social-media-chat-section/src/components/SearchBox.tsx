@@ -4,10 +4,10 @@ export default function SearchBox() {
   const timerRef: any = useRef(null);
 
   const debouncedSearch = (value: string) => {
-    if (timerRef?.timerId) {
+    if (timerRef?.current) {
       clearTimeout(timerRef.current.timerId);
     }
-    timerRef.timerId = setTimeout(() => {
+    timerRef.current = setTimeout(() => {
       alert(value);
     }, 3000);
   };
