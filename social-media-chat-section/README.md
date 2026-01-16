@@ -9,7 +9,7 @@ A chat section you see on linkedIn. No third-party libraries used.
 - When more than five chat modals are opened, the oldest modal is automatically closed to keep the screen clean.
 - Chats can be searched by username or by message content.
 
-![linked-in-chat](./images/linked-in-chat-image.png)
+![linked-in-chat](./images/linked-in-chat-preview.png)
 
 ## Technologies Used:
 - React JS
