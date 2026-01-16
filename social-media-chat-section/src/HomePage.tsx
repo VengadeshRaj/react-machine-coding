@@ -92,7 +92,7 @@ export default function HomePage() {
 
   return (
     <div className="relative flex flex-col bg-gray-100 items-center h-screen justify-center text-sm">
-      <div className="font-bold text-xl">Newsfeed will flow here..</div>
+      <div className="font-bold text-xl">News feed will flow here...</div>
       <div className="absolute bottom-0 right-1 flex flex-row items-end">
         <div className="self-end flex flex-row gap-1 items-end">
           {buildSelectedChats()}
