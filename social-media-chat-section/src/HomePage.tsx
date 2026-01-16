@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ChatSection from "./components/ChatSection";
 import { CHAT_DEFAULT_VALUES } from "./constants";
 import ChatModal from "./components/ChatModal";
@@ -21,8 +21,13 @@ export interface SelectedChat extends ChatData {
 }
 
 export default function HomePage() {
-  const [chatData, setChatData] = useState<ChatData[]>(CHAT_DEFAULT_VALUES);
+  const [overAllChatData, setOverAllChatData] = useState(CHAT_DEFAULT_VALUES);
+  const [chatData, setChatData] = useState<ChatData[]>([]);
   const [selectedChats, setSelectedChats] = useState<SelectedChat[]>([]);
+
+  useEffect(() => {
+    setChatData(overAllChatData);
+  }, []);
 
   const getModalOpenConfig = (modalCount: number) => {
     if (modalCount < 3) return 3;
@@ -31,9 +36,9 @@ export default function HomePage() {
   };
 
   const applyChatOpenConfig = (newSelectedChats: SelectedChat[]) => {
-    const openModalAllowed = getModalOpenConfig(selectedChats.length);
+    const noOfModalAllowed = getModalOpenConfig(selectedChats.length);
     const chats = newSelectedChats.map((c, i) => {
-      if (i < openModalAllowed) {
+      if (i < noOfModalAllowed) {
         c.isMessageVisible = true;
       } else c.isMessageVisible = false;
       return c;
@@ -56,7 +61,7 @@ export default function HomePage() {
   };
 
   const onChatHeaderClick = (chatId: number) => {
-    const openModalAllowed = getModalOpenConfig(selectedChats.length + 1);
+    const noOfModalAllowed = getModalOpenConfig(selectedChats.length + 1);
     const newSelectedChats =
       selectedChats?.map((s) => {
         if (s.chatId == chatId) {
@@ -93,9 +98,10 @@ export default function HomePage() {
           {buildSelectedChats()}
         </div>
         <ChatSection
+          overAllChatData={overAllChatData}
           chatData={chatData}
           onChatClick={(id: number) => onChatClick(id)}
-          setChatData ={setChatData}
+          setChatData={setChatData}
         />
       </div>
     </div>

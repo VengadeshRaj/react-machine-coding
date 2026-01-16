@@ -1,16 +1,23 @@
-# Social media chat section
+# LinkedIn chat section
 
-A usual social media chat section you see on internet
+A chat section you see on linkedIn. No third-party libraries used.
 
-Dev in progress - Chat modal
+- A floating chat panel stays on top of the news feed.
+- Clicking the header (up-arrow) reveals the list of available chats.
+- Selecting a chat opens it in a separate modal window.
+- You can open multiple chat modals at once.
+- When more than five chat modals are opened, the oldest modal is automatically closed to keep the screen clean.
+- Chats can be searched by username or by message content.
 
-# Dev things used:
+![linked-in-chat](./images/linked-in-chat-image.png)
 
-e.stopPropogation()
+## Technologies Used:
+- React JS
+- Tailwind CSS
 
-## Pending Items:
+## Dev concepts used:
 
-- Sending message to chats
-- Restrict 3 chat windows
-- Search Message or Person in chat (Complete search feature)
+- Debouncing used in message search option in chat.
+- e.stopPropagation() to stop propagation at modal close button.
+
 

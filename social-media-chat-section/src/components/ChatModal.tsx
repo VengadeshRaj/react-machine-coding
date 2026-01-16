@@ -38,9 +38,8 @@ export default function ChatModal(props: ChatModal) {
 
   return (
     <div
-      className={`relative bottom-0 right-1 bg-gray-900 text-white w-[${
-        isMessageVisible ? "450px" : "250px"
-      }] rounded-t-lg`}
+      style={{ width: isMessageVisible ? "450px" : "250px" }}
+      className={`relative bottom-0 right-1 bg-gray-900 text-white rounded-t-lg`}
     >
       <div
         className="flex w-full hover:bg-gray-800 cursor-pointer rounded-t-lg border-b border-white/50"
