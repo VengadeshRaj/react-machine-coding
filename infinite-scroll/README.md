@@ -8,4 +8,4 @@ A grid that displays a list of company records with infinite scrolling. As you r
 ## Technologies Used:
 - React JS
 - TailWind CSS
-- Throttling mechanism
+- <div style={{color:"green"}} > Throttling mechanism </div>
