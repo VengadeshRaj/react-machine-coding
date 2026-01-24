@@ -28,3 +28,4 @@ Please go through the `README.md` of each folder before jumping into the solutio
 | searchable-text-box | A searchable text box that allows users to look up fruits, displaying dynamic suggestions based on their input used debouncing mechanism to minimize unnecessary event triggers.|
 | infinite-scroll | Grid displays the data with infinite scroll |
 | linkedin-chat-section | Replica of the LinkedIn chat |
+| faq-section | Frequently Asked Questions (FAQ) section |

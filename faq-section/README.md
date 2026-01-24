@@ -1,6 +1,6 @@
 # FAQ Section
 
-General frequently asked questions section you see on the different websites, List of faqs will be displayed in the page. initially questions only visible to the user. once user click on any one of the faq the answer will be displayed to the user.
+A general Frequently Asked Questions (FAQ) section commonly seen on websites. A list of questions is displayed on the page, where initially only the questions are visible to the user. When the user clicks on any FAQ item, the corresponding answer expands and becomes visible
 
 ![faq-collapsed](./images/faq-collapsed.png)
 ![faq-expanded](./images/faq-expanded.png)
