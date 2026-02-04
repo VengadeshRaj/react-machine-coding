@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
-const useRotate = (length: number) => {
+const useRotate = (
+  length: number,
+): [index: number, next: () => void, previous: () => void] => {
   const [index, setIndex] = useState(0);
   const next = () => {
     setIndex((prev) => (prev == length - 1 ? 0 : prev + 1));
