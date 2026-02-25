@@ -11,7 +11,7 @@ export default function StarRating() {
 }
 
 function StarIcon({
-  size = 24,
+  size = 50,
   filled = false,
 }: {
   size?: number;
