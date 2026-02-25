@@ -29,3 +29,4 @@ Please go through the `README.md` of each folder before jumping into the solutio
 | infinite-scroll | Grid displays the data with infinite scroll |
 | linkedin-chat-section | Replica of the LinkedIn chat |
 | faq-section | Frequently Asked Questions (FAQ) section |
+| age-calculator | Age calculator app to find out your age in years,months and days |
