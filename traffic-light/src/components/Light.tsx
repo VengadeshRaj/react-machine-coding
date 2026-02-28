@@ -6,10 +6,10 @@ type LightProps = {
 };
 
 const Light = (props: LightProps) => {
-  const { colour,status } = props;
+  const { colour, status } = props;
 
   const getColour = () => {
-    if(status == 'OFF') return "bg-gray-500";
+    if (status == "OFF") return "bg-gray-500";
     switch (colour) {
       case "red":
         return "bg-red-600";
