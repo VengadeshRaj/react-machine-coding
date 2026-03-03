@@ -1,30 +1,7 @@
-import React, { useEffect, useState } from "react";
+import useProgress from "./hooks/useProgress";
 
 const ProgressBar = () => {
-  const [percentage, setPercentage] = useState(0);
-  const [intervalId, setIntervalId] = useState<NodeJS.Timer | null>(null);
-
-  useEffect(() => {
-    runInterval();
-
-    return () => {
-      if (intervalId) clearInterval(intervalId);
-    };
-  }, [percentage]);
-
-  const runInterval = () => {
-    const id = setInterval(() => {
-      setPercentage((prev) => {
-        if (prev >= 100) {
-          clearInterval(id);
-          return 100;
-        }
-        return prev + 1;
-      });
-    }, 100);
-
-    setIntervalId(id);
-  };
+  const percentage = useProgress();
 
   return (
     <div className="flex flex-col items-center h-screen justify-center bg-gray-200 gap-5">
