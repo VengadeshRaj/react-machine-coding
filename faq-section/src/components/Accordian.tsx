@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ToggleButton from "./ToggleButton";
+import useAccordianActions from "../hooks/useAccordianActions";
 
 type AccordianType = {
   title: string;
@@ -8,7 +9,7 @@ type AccordianType = {
 
 const Accordian = (props: AccordianType) => {
   const { title, contents } = props;
-  const [status, setStatus] = useState<"OPEN" | "CLOSE">("CLOSE");
+  const [status, accordianClick] = useAccordianActions();
 
   const buildAccordianContent = () =>
     contents.map((content, i) => (
@@ -17,18 +18,14 @@ const Accordian = (props: AccordianType) => {
       </li>
     ));
 
-  const onAccordianClick = () => {
-    setStatus((prev) => (prev === "OPEN" ? "CLOSE" : "OPEN"));
-  };
-
   return (
     <div
       className="flex flex-col p-3 border-b-2 border-black-600 cursor-pointer hover:bg-gray-100 rounded"
-      onClick={() => onAccordianClick()}
+      onClick={() => accordianClick()}
     >
       <div className="flex flex-row justify-between hover:text-blue-600">
         <h2 className="font-medium text-left">{title}</h2>
-        <ToggleButton status={status} onClick={() => onAccordianClick()} />
+        <ToggleButton status={status} onClick={() => accordianClick()} />
       </div>
       <div className="">
         {status === "OPEN" && (
