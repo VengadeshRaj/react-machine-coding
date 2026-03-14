@@ -12,9 +12,8 @@ const useScrollCallback = (action: () => void) => {
     const isBottom =
       window.innerHeight + window.scrollY >= document.body.offsetHeight - 2;
 
-    if (isBottom) {
-      action();
-    }
+    if (isBottom) action();
+    
   };
 };
 
