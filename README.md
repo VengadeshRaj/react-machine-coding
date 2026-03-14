@@ -1,6 +1,6 @@
 # React Machine Coding Topics
 
-This repository includes different types of React machine coding challenges and their solutions. Each folder inside this repo contains a single machine coding topic and its solution. Every folder under apps/ represents one machine coding challenge. 
+This repository includes different types of React machine coding challenges and their solutions. Each folder under `apps/` represents one machine coding challenge. 
 
 Please go through the `README.md` of each folder before jumping into the solutions.
 
