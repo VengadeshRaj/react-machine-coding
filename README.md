@@ -1,17 +1,28 @@
 # React Machine Coding Topics
 
-This repository includes different types of React machine coding challenges and their solutions. Each folder inside this repo contains a single machine coding topic and its solution.
+This repository includes different types of React machine coding challenges and their solutions. Each folder inside this repo contains a single machine coding topic and its solution. Every folder under apps/ represents one machine coding challenge. 
 
 Please go through the `README.md` of each folder before jumping into the solutions.
+
+## Monorepo Structure
+
+This project is organized using pnpm workspaces (monorepo architecture) to manage multiple React apps efficiently. 
 
 ## Common Prerequisites:
 
 - Node.js installed.
+- pnpm installed.
 
 ## Common Technologies Used:
 
 - React JS
 - Tailwind CSS
+
+## Running an App
+
+From the root of the repository: pnpm dev <app-name>
+
+Example: `pnpm dev age-calculator`
 
 ## List of Machine Coding Topics:
 
