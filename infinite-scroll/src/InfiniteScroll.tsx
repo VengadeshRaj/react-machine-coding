@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Table from "./components/Table";
 import { getCompanyRecords } from "./api/getCompanyRecords";
 import Loader from "./components/Loader";
+import useScrollCallback from "./hooks/useScrollCallback";
 
 export default function InfiniteScroll() {
   const [tableValues, setTableValues] = useState({
@@ -9,29 +10,15 @@ export default function InfiniteScroll() {
     body: [[]],
   });
   const [isLoading, setIsLoading] = useState(false);
+  useScrollCallback(fetchCompanyRecords);
 
-  useEffect(() => {
-    fetchCompanyRecords();
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const fetchCompanyRecords = async () => {
+  async function fetchCompanyRecords  () {
     setIsLoading(true);
     const result = await getCompanyRecords();
     setIsLoading(false);
     setTableValues((prev) => ({ ...prev, body: [...prev.body, ...result] }));
   };
 
-  const handleScroll = () => {
-    const isBottom =
-      window.innerHeight + window.scrollY >= document.body.offsetHeight - 2;
-
-    if (isBottom) {
-      fetchCompanyRecords();
-    }
-  };
 
   return (
     <div className="flex flex-col gap-5 bg-gray-100">
