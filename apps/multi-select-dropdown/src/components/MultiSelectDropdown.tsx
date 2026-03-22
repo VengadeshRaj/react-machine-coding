@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
+import useDebouncedSearch from "../hooks/useDebouncedSearch";
 
 type MultiSelectProps = {
   options: string[];
@@ -7,17 +8,28 @@ type MultiSelectProps = {
 
 const MultiSelect = (props: MultiSelectProps) => {
   const { title, options } = props;
-  const [optionsToShow, setOptionsToShow] = useState(options);
+  const [inputValue, suggestions, onChange, reset] =
+    useDebouncedSearch(options);
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
 
-  const buildOptions = () =>
-    optionsToShow.map((option) => (
-      <li className="flex flex-row gap-1 font-medium">
-        <input type="checkbox" className="cursor-pointer" name={option} onChange={(e)=>onOptionSelect(e)}/>
-        {option}
-      </li>
-    ));
+  const buildOptions = () => {
+    if (suggestions.length > 0) {
+      return suggestions.map((option) => (
+        <li className="flex flex-row gap-1 font-medium">
+          <input
+            type="checkbox"
+            className="cursor-pointer"
+            name={option}
+            checked={selected.includes(option)}
+            onChange={(e) => onOptionSelect(e)}
+          />
+          {option}
+        </li>
+      ));
+    }
+    return <li>No Records Found..</li>
+  };
 
   const buildSelectedOptions = () =>
     selected.map((s) => (
@@ -27,14 +39,13 @@ const MultiSelect = (props: MultiSelectProps) => {
       </span>
     ));
 
-    const onOptionSelect =(event:any)=>{
-      if(event.target.checked){
-        setSelected([...selected,event.target.name])
-      }
-      else {
-        setSelected((prev)=>prev.filter((s)=>s!=event.target.name))
-      }
+  const onOptionSelect = (event: any) => {
+    if (event.target.checked) {
+      setSelected([...selected, event.target.name]);
+    } else {
+      setSelected((prev) => prev.filter((s) => s != event.target.name));
     }
+  };
 
   return (
     <div className="flex flex-row gap-2 items-center">
@@ -43,18 +54,19 @@ const MultiSelect = (props: MultiSelectProps) => {
         <div
           className="flex flex-wrap gap-2 p-2 border border-black border-2 rounded cursor-text relative"
           onClick={() => setIsOpen(true)}
-          
         >
           {buildSelectedOptions()}
         </div>
         {isOpen && (
-        <div className="bg-green-100 flex flex-col p-4 rounded absolute mt-1">
-          <input
-            className="rounded h-8 border border-2 border-black p-1"
-            placeholder="Search"
-          />
-          <ul className="p-1">{buildOptions()}</ul>
-        </div>
+          <div className="bg-green-100 flex flex-col p-4 rounded absolute mt-1">
+            <input
+              className="rounded h-8 border border-2 border-black p-1"
+              placeholder="Search"
+              value={inputValue}
+              onChange={(e) => onChange(e.target.value)}
+            />
+            <ul className="p-1">{buildOptions()}</ul>
+          </div>
         )}
       </div>
     </div>
