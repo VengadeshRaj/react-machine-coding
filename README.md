@@ -41,3 +41,4 @@ Example: `pnpm dev age-calculator`
 | linkedin-chat-section | Replica of the LinkedIn chat |
 | faq-section | Frequently Asked Questions (FAQ) section |
 | age-calculator | Age calculator app to find out your age in years,months and days |
+| multi-select-dropdown | A multi-select dropdown allows users to select multiple options from a list |
