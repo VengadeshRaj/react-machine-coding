@@ -1,5 +1,6 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import useDebouncedSearch from "../hooks/useDebouncedSearch";
+import useClickOutsideByRef from "../hooks/useClickOutsideByRef";
 
 type MultiSelectProps = {
   options: string[];
@@ -8,6 +9,9 @@ type MultiSelectProps = {
 
 const MultiSelect = (props: MultiSelectProps) => {
   const { title, options } = props;
+  const multiSelectRef = useRef<HTMLDivElement>(null);
+  useClickOutsideByRef(multiSelectRef, () => setIsOpen(false));
+
   const [inputValue, suggestions, onChange, reset] =
     useDebouncedSearch(options);
   const [isOpen, setIsOpen] = useState(false);
@@ -28,14 +32,21 @@ const MultiSelect = (props: MultiSelectProps) => {
         </li>
       ));
     }
-    return <li>No Records Found..</li>
+    return <li>No Records Found..</li>;
+  };
+
+  const onItemRemove = (item: string) => {
+    setSelected((prev) => prev.filter((s) => s != item));
   };
 
   const buildSelectedOptions = () =>
     selected.map((s) => (
-      <span className="flex flex-row gap-2 p-1 px-3 h-8 bg-green-100 text-green-600 rounded font-medium rounded-full">
+      <span className="flex flex-row gap-2 py-1 px-2 h-8 bg-green-100 text-green-600 rounded font-medium rounded-full">
         <span>{s}</span>
-        <button className="text-black"> ✕</button>
+        <button className="text-black" onClick={() => onItemRemove(s)}>
+          {" "}
+          ✕
+        </button>
       </span>
     ));
 
@@ -50,9 +61,9 @@ const MultiSelect = (props: MultiSelectProps) => {
   return (
     <div className="flex flex-row gap-2 items-center">
       <label className="font-bold text-xl">{title} : </label>
-      <div className="w-96">
+      <div className="w-80" ref={multiSelectRef}>
         <div
-          className="flex flex-wrap gap-2 p-2 border border-black border-2 rounded cursor-text relative"
+          className="relative flex flex-wrap gap-2 p-1 border border-black border-2 rounded cursor-text min-h-10"
           onClick={() => setIsOpen(true)}
         >
           {buildSelectedOptions()}
