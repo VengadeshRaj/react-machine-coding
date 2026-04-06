@@ -6,7 +6,7 @@ Please go through the `README.md` of each folder before jumping into the solutio
 
 ## Monorepo Structure
 
-This project is organized using pnpm workspaces (monorepo architecture) to manage multiple React apps efficiently. 
+This project is organized using pnpm workspaces (monorepo architecture) to manage multiple React apps efficiently. PNPM is used for managing packages efficiently. Please go through this [site](https://pnpm.io/motivation) to get an idea about it.
 
 ## Common Prerequisites:
 
