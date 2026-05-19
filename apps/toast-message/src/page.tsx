@@ -1,5 +1,5 @@
 const Page =()=>{
-    return <div> Hello from toast message app.</div>
+    return <div> Hello from toast message.</div>
 }
 
 export default Page;
