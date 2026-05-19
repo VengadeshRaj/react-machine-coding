@@ -1,4 +1,4 @@
-# React Machine Coding Topics
+# React Machine Coding Topics:
 
 This repository includes different types of React machine coding challenges and their solutions. Each folder under `apps/` represents one machine coding challenge. 
 
