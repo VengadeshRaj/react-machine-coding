@@ -1,6 +1,6 @@
 const Page = () => {
     return (
-        <div className="flex flex-row h-screen bg-gray-200 gap-5">
+        <div className="flex flex-row h-screen bg-gray-200">
             <div>Contents will be here...</div>
             <div>
                 <button>Success Toast</button>
