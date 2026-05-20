@@ -3,3 +3,5 @@ packages:
 allowBuilds:
   core-js: false
   core-js-pure: false
+minimumReleaseAgeExclude:
+  - '@types/react@19.2.15'
