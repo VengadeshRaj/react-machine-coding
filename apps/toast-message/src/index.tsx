@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// @ts-ignore: Cannot find module or type declarations for side-effect import of './index.css'.
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Page from './page';
