@@ -2,14 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import Page from "./page";
-import './index.css'
+import "./index.css";
+import ToastMessage from "./components/ToastMessage";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
 );
 root.render(
   <React.StrictMode>
-    <Page />
+      <ToastMessage/>
+      <Page />
   </React.StrictMode>,
 );
 
