@@ -4,14 +4,18 @@ import reportWebVitals from "./reportWebVitals";
 import Page from "./page";
 import "./index.css";
 import ToastMessage from "./components/ToastMessage";
+import ToastProvider from "./providers/ToastProvider";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
 );
+
 root.render(
   <React.StrictMode>
-      <ToastMessage/>
+    <ToastProvider>
+      <ToastMessage />
       <Page />
+    </ToastProvider>
   </React.StrictMode>,
 );
 
