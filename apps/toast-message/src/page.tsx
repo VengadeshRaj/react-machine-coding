@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import { ToastContext } from "./providers/ToastProvider";
+import { ToastValueType } from "./types/ToastMessage.type";
 
 const Page = () => {
-  const [, setToastValues] = useContext<any>(ToastContext);
+  const [, setToastValues] = useContext(ToastContext) as [ToastValueType, any];
 
   const onSuccessClick = () => {
     setToastValues({
