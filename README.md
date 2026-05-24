@@ -42,3 +42,4 @@ Example: `pnpm dev age-calculator`
 | faq-section | Frequently Asked Questions (FAQ) section |
 | age-calculator | Age calculator app to find out your age in years,months and days |
 | multi-select-dropdown | A multi-select dropdown allows users to select multiple options from a list |
+| toast-message | A toast message is a small temporary notification used to show success, warning, information, or error messages to users. |
