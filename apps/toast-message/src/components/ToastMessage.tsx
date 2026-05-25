@@ -5,10 +5,10 @@ import {
   InfoIcon,
   SuccessIcon,
   WarningIcon,
+  CloseIcon
 } from "../images/icons";
 import useToastTimer from "../hooks/useToastTimer";
 import { ToastValueType } from "../types/ToastMessage.type";
-import CloseIcon from "../images/icons/Close";
 
 const ToastMessage = () => {
   const [toastValues, setToastValues] = useContext(ToastContext) as [
