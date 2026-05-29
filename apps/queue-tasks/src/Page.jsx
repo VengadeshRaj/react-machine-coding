@@ -6,10 +6,9 @@ const Page = () => {
   const [taskData, setTaskData] = useState([]);
 
   const createNewTask = () => {
-    
     setTaskData((prev) => [
       ...prev,
-      { name: taskName, no: taskData.length ? taskData.length + 1 : 1 },
+      { name: taskName, no: (taskData.length || 0) + 1},
     ]);
     setTaskName("");
   };
