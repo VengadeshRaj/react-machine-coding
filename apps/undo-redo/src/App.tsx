@@ -1,24 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="flex flex-col gap-5 items-center justify-center h-screen bg-gray-100">
+      <div className="flex flex-row gap-5">
+        <label className="text-xl">Enter any value : </label>
+        <input className="border border-1 border-black rounded p-1 w-[350px]" />
+      </div>
+      <div className="flex flex-row gap-5">
+        <button className="border border-1 border-white text-white px-3 py-1 rounded bg-blue-500 hover:bg-blue-600">
+          Redo
+        </button>
+        <button className="border border-1 border-white text-white px-3 py-1 rounded bg-green-500 hover:bg-green-600">
+          Undo
+        </button>
+        
+      </div>
     </div>
   );
 }
