@@ -44,3 +44,4 @@ Example: `pnpm dev age-calculator`
 | multi-select-dropdown | A multi-select dropdown allows users to select multiple options from a list |
 | toast-message | A toast message is a small temporary notification used to show success, warning, information, or error messages to users. |
 | queue-tasks | Mimics a simple task queue where users can create multiple tasks with progress bars that update incrementally and turn green upon completion. |
+| undo-redo | A text box with Undo and Redo buttons. Undo removes the last typed character (like backspace), and Redo restores the most recently undone character. |
